@@ -68,7 +68,7 @@
   copy:
     src: "/tmp/restic_{{ restic_version }}_{{ go_arch }}"
     dest: '{{ restic_install_path }}/restic'
-    mode: '0750'
+    mode: '{{ restic_mode }}'
     owner: 'root'
     group: '{{ restic_group }}'
 

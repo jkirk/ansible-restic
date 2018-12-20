@@ -5,6 +5,7 @@ restic_user: root
 restic_group: "{{ restic_user }}"
 restic_shell: "/bin/false"
 restic_home: "/var/lib/restic"
+restic_mode: 0750
 
 restic_install_path: '/usr/local/bin'
 
