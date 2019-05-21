@@ -72,6 +72,11 @@
     owner: 'root'
     group: '{{ restic_group }}'
 
+- name: Read status of restic binary
+  stat:
+    path: '{{ restic_install_path }}/restic'
+  register: restic_binary
+
 - name: Install libcap on Debian systems
   apt:
     name: "libcap2-bin"
@@ -80,6 +85,7 @@
   when:
     - ansible_os_family | lower == "debian"
     - restic_user != 'root'
+    - restic_group != 'root'
 
 - name: Set proper capabilities for restic binary
   capabilities:
@@ -88,4 +94,6 @@
     state: present
   when:
     - restic_user != 'root'
+    - restic_group != 'root'
     - not ansible_check_mode
+    - not restic_binary.stat.xoth
